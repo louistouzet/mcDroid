@@ -43,7 +43,8 @@
                 android:baselineAlignBottom="true"
                 android:adjustViewBounds="false"
                 android:onClick="postMessage"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:layout_gravity="bottom|right" />
 
         </LinearLayout>
     </LinearLayout>
