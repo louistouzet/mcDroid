@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MoocAndroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="textViewSelectUserNameHint">User name</string>
+    <string name="textViewSelectUserNameButton">Submit</string>
+    <string name="textViewSelectUserNameLabel">Enter your user name</string>
+    <string name="title_activity_display_message">DisplayMessageActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
