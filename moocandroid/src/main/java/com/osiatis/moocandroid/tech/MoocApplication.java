@@ -1,4 +1,4 @@
-package com.osiatis.moocandroid;
+package com.osiatis.moocandroid.tech;
 
 import android.app.Application;
 

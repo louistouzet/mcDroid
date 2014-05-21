@@ -1,13 +1,19 @@
-package com.osiatis.moocandroid;
+package com.osiatis.moocandroid.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.osiatis.moocandroid.tech.MessageAdapter;
+import com.osiatis.moocandroid.tech.MoocApplication;
+import com.osiatis.moocandroid.R;
 import com.osiatis.moocandroid.model.Message;
 
 import java.util.ArrayList;
@@ -15,7 +21,14 @@ import java.util.ArrayList;
 
 public class DisplayMessageActivity extends Activity {
 
+    /**
+     * MessageAdapter to convert @see Message to item of the @see ListView
+     */
     private MessageAdapter messageAdapter;
+    /**
+     * @see EditText to type the message to post
+     */
+    private EditText editTextMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +38,17 @@ public class DisplayMessageActivity extends Activity {
         messageAdapter = new MessageAdapter(this, new ArrayList<Message>());
 
         ((ListView)findViewById(R.id.listViewMessage)).setAdapter(messageAdapter);
-
+        editTextMsg = (EditText) findViewById(R.id.editTextMessage);
+        //Add listener to handle ok button on keyboard
+        editTextMsg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    postMessage(null);
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -49,10 +72,10 @@ public class DisplayMessageActivity extends Activity {
     }
 
     public void postMessage(View view){
-        EditText editTextMsg = (EditText) findViewById(R.id.editTextMessage);
-        String message = editTextMsg.getText().toString();
-        //TODO: validate input
 
+        String message = editTextMsg.getEditableText().toString();
+        //TODO: validate input
+        editTextMsg.setText("");
         messageAdapter.add(new Message(((MoocApplication)getApplicationContext()).getUserName() + " : ",message));
         messageAdapter.notifyDataSetChanged();
 
